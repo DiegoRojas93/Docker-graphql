@@ -46,7 +46,7 @@ jobs:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
         docker push diego4304/docker-graphql:$NEW_VERSION .
-        docker push diego4304/docker-graphql:latest
+        docker push diego4304/docker-graphql:latest .
         echo "Vesion: ${NEW_VERSION}"
       
         
