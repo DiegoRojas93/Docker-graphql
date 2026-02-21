@@ -29,11 +29,11 @@ jobs:
 
     - name: Docker Build Image
       run: |
-        docker build diego4304/docker-graphql:1.0.5 .
+        docker build -t diego4304/docker-graphql:1.0.7 .
 
     - name: Docker Push Image
       run: |
-        docker push diego4304/docker-graphql:1.0.5
+        docker push diego4304/docker-graphql:1.0.7
       
         
     # - name: Build the Docker image
