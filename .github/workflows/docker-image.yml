@@ -30,20 +30,24 @@ jobs:
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        NEW_VERSION: ${{ steps.version.outputs.version }} 
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: | 
         docker login -u "${DOCKER_USER}" -p ${DOCKER_PASSWORD}
+
+    - name: Docker Build Image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        docker build -t diego4304/docker-graphql:$NEW_VERSION .
+        docker build -t diego4304/docker-graphql:latest .
+
+    - name: Docker Push Image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        docker push diego4304/docker-graphql:$NEW_VERSION .
+        docker push diego4304/docker-graphql:latest
         echo "Vesion: ${NEW_VERSION}"
-
-    # - name: Docker Build Image
-    #   run: |
-    #     docker build -t diego4304/docker-graphql:latest .
-    #     docker build -t diego4304/docker-graphql:1.0.2 .
-
-    # - name: Docker Push Image
-    #   run: |
-    #     docker push diego4304/docker-graphql:latest
-    #     docker push diego4304/docker-graphql:1.0.2
       
         
     # - name: Build the Docker image
